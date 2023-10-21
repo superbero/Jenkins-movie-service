@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  movie-service
+  namespace: dev
+spec:
+  selector:
+    app:  movie-svc-deploy
+  type:  NodePort
+  ports:
+  - name:  movie-service
+    port:  8000
+    targetPort:  8000
