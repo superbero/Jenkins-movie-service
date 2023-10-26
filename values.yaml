@@ -34,7 +34,7 @@ volumes:
   accessModes: ReadWriteMany
   
   persistentvolume:
-    name: postgres-data-jenkins
+    name: postgres-volumes
     size: 10Gi
     volume_path: /Users/admin/volumes # MacOS folder path
    
