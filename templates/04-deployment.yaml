@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.Deployment.movie_service.name }} #movie-svc-deploy
+  namespace: {{ .Values.namespace }} #dev
+  labels:
+    app: {{ .Values.Deployment.movie_service.name }} #movie-svc-deploy
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.movie_service.name }} #movie-svc-deploy
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.movie_service.name}} #movie-svc-deploy
+    spec:
+      containers:
+      - name: {{ .Values.Deployment.movie_service.name}} #movie-svc-deploy
+        image:  {{ .Values.Deployment.movie_service.image }} #superbero/movie_service:latest
+        imagePullPolicy: {{ .Values.Deployment.imagePullPolicy }} #IfNotPresent
+        command: ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.configmap.movie_service.name }} #movie-service-config
+

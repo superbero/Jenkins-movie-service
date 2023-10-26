@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.Deployment.movie_db.name}} #postgres-movie-db
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.movie_db.name}} #postgres-movie-db # has to match .spec.template.metadata.labels
+  serviceName: {{ .Values.Deployment.movie_db.name }} #postgres-movie-db
+  replicas: {{ .Values.Deployment.replicasCount }}  # by default is 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.movie_db.name}} #postgres-movie-db # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: {{ .Values.Deployment.movie_db.name}} #postgres-movie-db
+        image: {{ .Values.Deployment.postgres.image }} #postgres:12.1-alpine
+        ports:
+        - containerPort: {{ .Values.Deployment.postgres.ports }} #5432
+        envFrom:
+          - configMapRef: 
+              name: {{ .Values.configmap.postgres_movie.name }} #postgres-movie-configmap
+        volumeMounts:
+        - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+          mountPath: {{ .Values.Deployment.postgres.mountPath }} #/var/lib/postgresql/data/ 
+      volumes:
+        - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+          persistentVolumeClaim: 
+            claimName: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+---
