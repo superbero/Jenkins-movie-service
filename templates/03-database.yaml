@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.Deployment.movie_db.name}} #postgres-movie-db
+  name: {{ .Values.Deployment.movie_db.name }} #postgres-movie-db
   namespace: {{ .Values.namespace }}
 spec:
   selector:
@@ -25,8 +25,8 @@ spec:
         volumeMounts:
         - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
           mountPath: {{ .Values.Deployment.postgres.mountPath }} #/var/lib/postgresql/data/ 
-      # volumes:
-      #   - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
-      #     persistentVolumeClaim: 
-      #       claimName: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+      volumes:
+        - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+          persistentVolumeClaim: 
+            claimName: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
 ---
