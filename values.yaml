@@ -10,7 +10,7 @@ configmap:
     
   movie_service:
     name: movie-service-config
-    uri: "postgresql://movie:password@pg-movie:5432/movie_db"
+    uri: "postgresql://movie:password@pg-movie/movie_db"
     cast_service_uri: "http://cast:8000/api/v1/casts/"
 
 Deployment:
