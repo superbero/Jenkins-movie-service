@@ -13,9 +13,9 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volumes.persistentvolumeclaim.size }} # 2Gi
-  selector:
-    matchLabels:
-      labels: {{ .Values.volumes.persistentvolume.name }} #postgres-data
+  # selector:
+  #   matchLabels:
+  #     labels: {{ .Values.volumes.persistentvolume.name }} #postgres-data
 
 
 

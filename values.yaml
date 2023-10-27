@@ -44,7 +44,7 @@ volumes:
     accessModes: ReadWriteMany
     
     movie_db:
-      name: postgres-movie-datas
+      name: postgres-movie-data
 
 services:
   postgres_movie:

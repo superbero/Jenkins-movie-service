@@ -21,7 +21,7 @@ spec:
       - name: {{ .Values.Deployment.movie_service.name}} #movie-svc-deploy
         image:  {{ .Values.Deployment.movie_service.image }} #superbero/movie_service:latest
         imagePullPolicy: {{ .Values.Deployment.imagePullPolicy }} #IfNotPresent
-        #command: ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+        command: ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
         envFrom:
           - configMapRef:
               name: {{ .Values.configmap.movie_service.name }} #movie-service-config
