@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{.Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
+  name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
@@ -12,10 +12,10 @@ spec:
     - {{ .Values.volumes.accessModes}}
   resources:
     requests:
-      storage: {{.Values.volumes.persistentvolumeclaim.size }} # 2Gi
+      storage: {{ .Values.volumes.persistentvolumeclaim.size }} # 2Gi
   selector:
     matchLabels:
-      labels: {{.Values.volumes.persistentvolume.name }} #postgres-data
+      labels: {{ .Values.volumes.persistentvolume.name }} #postgres-data
 
 
 
