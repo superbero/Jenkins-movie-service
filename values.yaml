@@ -10,7 +10,7 @@ configmap:
     
   movie_service:
     name: movie-service-config
-    uri: "postgresql://movie:password@pg-movie/movie_db"
+    uri: "postgresql://movie:password@pg-movie:5432/movie_db"
     cast_service_uri: "http://cast:8000/api/v1/casts/"
 
 Deployment:
@@ -39,12 +39,12 @@ volumes:
     volume_path: /Users/admin/volumes # MacOS folder path
    
   persistentvolumeclaim:
-    size: 2Gi
+    size: 10Gi
     storageClassName: standard
     accessModes: ReadWriteMany
     
     movie_db:
-      name: postgres-movie-data
+      name: postgres-movie-volumes-claims
 
 services:
   postgres_movie:

@@ -29,4 +29,3 @@ spec:
         - name: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
           persistentVolumeClaim: 
             claimName: {{ .Values.volumes.persistentvolumeclaim.movie_db.name }} #postgres-data-movie
----
